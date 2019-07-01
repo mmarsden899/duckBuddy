@@ -11,15 +11,18 @@ import {
 } from 'react-native';
 
 import { ChewyText } from '../components/StyledText';
+import { GetPosition } from '../components/GetPosition';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
     <View style={styles.headerContainer}>
     <ChewyText style={styles.chewyText}>
-    Howdy
+    Howdy there
     </ChewyText>
     </View>
+    <GetPosition style={styles.map}>
+    </GetPosition>
     </View>
   );
 }
@@ -64,15 +67,19 @@ function handleHelpPress() {
 }
 
 const styles = StyleSheet.create({
+  map: {
+    height: 400,
+    marginTop: 80
+  },
   headerContainer: {
     borderBottomWidth: 1,
-    borderColor: '#000' 
+    borderColor: '#000'
   },
   chewyText: {
     color: '#000',
     fontSize: 30,
     textAlign: 'center',
-    marginTop: 35,
+    marginTop: 20,
   },
   container: {
     flex: 1,
