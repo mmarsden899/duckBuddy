@@ -12,59 +12,25 @@ import {
 
 import { ChewyText } from '../components/StyledText';
 import { GetPosition } from '../components/GetPosition';
+import { SafeAreaView } from 'react-navigation';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-    <View style={styles.headerContainer}>
-    <ChewyText style={styles.chewyText}>
-    Howdy there
-    </ChewyText>
-    </View>
-    <GetPosition style={styles.map}>
-    </GetPosition>
-    </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.headerContainer}>
+        <ChewyText style={styles.chewyText}>
+        Howdy there
+        </ChewyText>
+        </View>
+        <GetPosition style={styles.map}>
+        </GetPosition>
+      </SafeAreaView>
   );
 }
 
 HomeScreen.navigationOptions = {
   header: null,
 };
-
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
 
 const styles = StyleSheet.create({
   map: {
@@ -73,17 +39,17 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     borderBottomWidth: 1,
-    borderColor: '#000'
+    borderColor: '#222'
   },
   chewyText: {
-    color: '#000',
+    color: '#222',
     fontSize: 30,
     textAlign: 'center',
-    marginTop: 20,
+    marginBottom: 5
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#faf8f0',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -145,7 +111,7 @@ const styles = StyleSheet.create({
       },
     }),
     alignItems: 'center',
-    backgroundColor: '#fbfbfb',
+    backgroundColor: '#faf8f0',
     paddingVertical: 20,
   },
   tabBarInfoText: {
