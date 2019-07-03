@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Polyline } from 'react-native-maps'
+import { View, Text, Image } from 'react-native';
+import MapView, { PROVIDER_GOOGLE, Polyline, Marker } from 'react-native-maps'
 
 mapStyle = [
   {
@@ -222,25 +222,32 @@ export class GetPosition extends Component {
   constructor(props) {
       super(props)
       this.mapRef = null;
-}
+
+    }
 
     render() {
       return (
         <MapView
         followUserLocation={true}
         style={{flex: 1}}
-        showsUserLocation
         showsBuildings
+        showsUserLocation
         showsMyLocationButton
         minZoomLevel={10}  // default => 0
         maxZoomLevel={18} // default => 20
         ref={(ref) => { this.mapRef = ref }}
         onLayout = {() => this.mapRef.fitToCoordinates(this.props.myLatLongs)}
         provider={PROVIDER_GOOGLE}
-        zoomEnabled={true}
-        enableZoomControl={true}
-        zoomControlEnabled={true}
+        zoomEnabled
+        enableZoomControl
+        zoomControlEnabled
         customMapStyle={mapStyle}>
-                </MapView>
+        <Marker coordinate={{
+          latitude: 42.387597,
+          longitude: -71.099497
+        }}>
+        <Image source={require('../assets/images/robot-dev.png')} style={{height: 35, width:35, }} />
+        </Marker>
+        </MapView>
       );
     }}
