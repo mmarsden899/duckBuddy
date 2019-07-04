@@ -19,7 +19,7 @@ export default function HomeScreen() {
       <SafeAreaView style={styles.container}>
         <View style={styles.headerContainer}>
         <ChewyText style={styles.chewyText}>
-        Howdy there
+        Howdy There
         </ChewyText>
         </View>
         <GetPosition style={styles.map}>

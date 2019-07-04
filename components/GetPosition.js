@@ -218,36 +218,58 @@ mapStyle = [
   }
 ]
 
-export class GetPosition extends Component {
+export class GetPosition extends React.Component {
   constructor(props) {
-      super(props)
-      this.mapRef = null;
+    super(props)
+    this.state = {
+      latitude: null,
+      longitude: null
+    };
+  }
 
+    componentDidMount() {
+        window.navigator.geolocation.getCurrentPosition(
+            success => this.setState({
+              latitude: success.coords.latitude,
+              longitude: success.coords.longitude
+            })
+        );
     }
 
+
     render() {
-      return (
+      return this.state.latitude !== null &&
         <MapView
-        followUserLocation={true}
-        style={{flex: 1}}
-        showsBuildings
-        showsUserLocation
-        showsMyLocationButton
-        minZoomLevel={10}  // default => 0
-        maxZoomLevel={18} // default => 20
-        ref={(ref) => { this.mapRef = ref }}
-        onLayout = {() => this.mapRef.fitToCoordinates(this.props.myLatLongs)}
-        provider={PROVIDER_GOOGLE}
-        zoomEnabled
-        enableZoomControl
-        zoomControlEnabled
-        customMapStyle={mapStyle}>
+          initialRegion={{
+            latitude: this.state.latitude,
+            longitude: this.state.longitude,
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1,
+          }}
+          followUserLocation={true}
+          style={{flex: 1}}
+          showsBuildings
+          showsMyLocationButton
+          minZoomLevel={10}  // default => 0
+          maxZoomLevel={18} // default => 20
+          ref={(ref) => { this.mapRef = ref }}
+          provider={PROVIDER_GOOGLE}
+          zoomEnabled
+          enableZoomControl
+          zoomControlEnabled
+          customMapStyle={mapStyle}>
         <Marker coordinate={{
-          latitude: 42.387597,
-          longitude: -71.099497
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1
         }}>
-        <Image source={require('../assets/images/robot-dev.png')} style={{height: 35, width:35, }} />
+        <Image source={require('../assets/images/ducky.png')}
+          style={{
+            height: 50,
+            width: 50,
+          }}
+          />
         </Marker>
         </MapView>
-      );
     }}
