@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Button } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Polyline, Marker } from 'react-native-maps'
 
 mapStyle = [
@@ -223,23 +223,35 @@ export class GetPosition extends React.Component {
     super(props)
     this.state = {
       latitude: null,
-      longitude: null
+      longitude: null,
+      longitudeDelta: null,
+      latitudeDelta: null
     };
   }
 
-    componentDidMount() {
-        window.navigator.geolocation.getCurrentPosition(
-            success => this.setState({
-              latitude: success.coords.latitude,
-              longitude: success.coords.longitude
-            })
-        );
-    }
+  componentDidMount() {
+    window.navigator.geolocation.getCurrentPosition(
+      success => this.setState({
+        latitude: success.coords.latitude,
+        longitude: success.coords.longitude
+      })
+    );
+  }
 
+  animate(){
+    let r = {
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1,
+    }
+    this.mapView.animateToRegion(r, 2000);
+}
 
     render() {
       return this.state.latitude !== null &&
         <MapView
+          ref={ref=>(this.mapView=ref)}
           initialRegion={{
             latitude: this.state.latitude,
             longitude: this.state.longitude,
@@ -252,24 +264,29 @@ export class GetPosition extends React.Component {
           showsMyLocationButton
           minZoomLevel={10}  // default => 0
           maxZoomLevel={18} // default => 20
-          ref={(ref) => { this.mapRef = ref }}
           provider={PROVIDER_GOOGLE}
-          zoomEnabled
-          enableZoomControl
-          zoomControlEnabled
+          zoomEnabled={true}
+          enableZoomControl={true}
+          zoomControlEnable={true}
+          onPress={()=>this.animate()}
           customMapStyle={mapStyle}>
         <Marker coordinate={{
           latitude: this.state.latitude,
           longitude: this.state.longitude,
           latitudeDelta: 0.1,
           longitudeDelta: 0.1
-        }}>
+        }}
+        title={'Me'}>
         <Image source={require('../assets/images/ducky.png')}
           style={{
-            height: 50,
-            width: 50,
+            height: 25,
+            width: 25,
           }}
           />
         </Marker>
+        <Button
+        title="Learn More"
+        >
+        </Button>
         </MapView>
     }}
