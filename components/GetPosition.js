@@ -239,14 +239,14 @@ export class GetPosition extends React.Component {
     );
   }
 
-  animate(){
-    let r = {
+  animate () {
+    let region = {
         latitude: this.state.latitude,
         longitude: this.state.longitude,
-        latitudeDelta: 0.1,
-        longitudeDelta: 0.1,
+        latitudeDelta: .0005,
+        longitudeDelta: .0005,
     }
-    this.mapView.animateToRegion(r, 2000);
+    this.mapView.animateToRegion(region, 1000);
 }
 
     render() {
@@ -256,8 +256,8 @@ export class GetPosition extends React.Component {
           initialRegion={{
             latitude: this.state.latitude,
             longitude: this.state.longitude,
-            latitudeDelta: 0.1,
-            longitudeDelta: 0.1,
+            latitudeDelta: .0005,
+            longitudeDelta: .0005,
           }}
           followUserLocation={true}
           style={{flex: 1}}
@@ -287,15 +287,19 @@ export class GetPosition extends React.Component {
           raised
           name='location-arrow'
           type='font-awesome'
-          color='#2e78b7'
-          style={styles.icon}
+          containerStyle={styles.iconContainer}
+          iconStyle={styles.icon}
           onPress={()=>this.animate()}/>
         </MapView>
     }}
 
 const styles = StyleSheet.create({
+  iconContainer: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0
+  },
   icon: {
     color: '#2e78b7',
-    marginLeft: 50
   }
 })
