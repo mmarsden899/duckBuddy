@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Button } from 'react-native';
+import { View, Text, Image, Button, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements'
 import MapView, { PROVIDER_GOOGLE, Polyline, Marker } from 'react-native-maps'
 
 mapStyle = [
@@ -261,14 +262,12 @@ export class GetPosition extends React.Component {
           followUserLocation={true}
           style={{flex: 1}}
           showsBuildings
-          showsMyLocationButton
           minZoomLevel={10}  // default => 0
           maxZoomLevel={18} // default => 20
           provider={PROVIDER_GOOGLE}
           zoomEnabled={true}
           enableZoomControl={true}
           zoomControlEnable={true}
-          onPress={()=>this.animate()}
           customMapStyle={mapStyle}>
         <Marker coordinate={{
           latitude: this.state.latitude,
@@ -284,9 +283,19 @@ export class GetPosition extends React.Component {
           }}
           />
         </Marker>
-        <Button
-        title="Learn More"
-        >
-        </Button>
+        <Icon
+          raised
+          name='location-arrow'
+          type='font-awesome'
+          color='#2e78b7'
+          style={styles.icon}
+          onPress={()=>this.animate()}/>
         </MapView>
     }}
+
+const styles = StyleSheet.create({
+  icon: {
+    color: '#2e78b7',
+    marginLeft: 50
+  }
+})
