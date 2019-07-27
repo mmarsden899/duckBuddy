@@ -266,8 +266,6 @@ export class GetPosition extends React.Component {
           maxZoomLevel={18} // default => 20
           provider={PROVIDER_GOOGLE}
           zoomEnabled={true}
-          enableZoomControl={true}
-          zoomControlEnable={true}
           customMapStyle={mapStyle}>
         <Marker coordinate={{
           latitude: this.state.latitude,
@@ -280,6 +278,9 @@ export class GetPosition extends React.Component {
           style={{
             height: 25,
             width: 25,
+            borderRadius: 4,
+            borderWidth: 1,
+            borderColor: 'red'
           }}
           />
         </Marker>
@@ -296,8 +297,8 @@ export class GetPosition extends React.Component {
 const styles = StyleSheet.create({
   iconContainer: {
     position: 'absolute',
-    right: 0,
-    bottom: 0
+    right: 5,
+    bottom: 5
   },
   icon: {
     color: '#2e78b7',
